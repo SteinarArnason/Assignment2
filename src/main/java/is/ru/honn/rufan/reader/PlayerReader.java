@@ -65,6 +65,7 @@ public class PlayerReader
         player.addPosition(position);
       }
 
+
       players.add(player);
       readHandler.read(i, player);
     }
