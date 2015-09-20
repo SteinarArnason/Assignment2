@@ -2,6 +2,7 @@ package is.ru.honn.rufan.reader;
 
 import org.json.simple.JSONObject;
 
+import javax.ws.rs.client.ClientBuilder;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -19,8 +20,7 @@ public abstract class AbstractReader implements Reader {
     }
 
     public Object read() {
-
-        return null;
+        return parse(new ClientRequest().getRequest(URI));
     }
 
     public void setURI(String URI) {
