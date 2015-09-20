@@ -19,6 +19,7 @@ public abstract class AbstractReader implements Reader {
     }
 
     public Object read() {
+
         return null;
     }
 
