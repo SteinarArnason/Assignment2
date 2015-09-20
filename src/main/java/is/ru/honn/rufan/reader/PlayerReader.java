@@ -5,7 +5,6 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
-import javax.swing.text.Position;
 import java.util.*;
 
 public class PlayerReader

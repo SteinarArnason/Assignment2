@@ -1,6 +1,5 @@
 package is.ru.honn.rufan.domain;
 
-import javax.swing.text.Position;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
