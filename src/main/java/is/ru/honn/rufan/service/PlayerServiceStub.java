@@ -41,7 +41,7 @@ public class PlayerServiceStub implements PlayerService {
         for(Player m : myList) {
             List<Position> abb = m.getPositions();
             for(Position pos : abb) {
-                if(pos.getAbbreviation() == abbreviation) {
+                if(pos.getAbbreviation().equals(abbreviation)) {
                     p.add(m);
                     break;
                 }
