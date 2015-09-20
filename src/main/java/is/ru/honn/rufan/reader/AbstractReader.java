@@ -13,6 +13,7 @@ import java.util.Locale;
 public abstract class AbstractReader implements Reader {
 
     protected ReadHandler readHandler;
+    protected String URI;
 
     public AbstractReader() {
     }
@@ -22,7 +23,7 @@ public abstract class AbstractReader implements Reader {
     }
 
     public void setURI(String URI) {
-        //TODO
+        this.URI = URI;
     }
 
     public void setReadHandler(ReadHandler readHandler) {
