@@ -10,10 +10,12 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
-public class AbstractReader {
+public abstract class AbstractReader {
 
     public AbstractReader() {
     }
+
+    protected abstract Object parse(String content);
 
     protected int getInt(JSONObject jParent, String name)
     {
@@ -32,6 +34,7 @@ public class AbstractReader {
         return cal.getTime();
     }
 
+    // Format example 2015-08-21T16:19:30.6967613Z
     protected Date convertDate(String strDate)
     {
         DateFormat format = new SimpleDateFormat("yyyy.MM.dd'T'HH:mm:ss", Locale.ENGLISH);
