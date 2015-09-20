@@ -15,7 +15,6 @@ public class PlayerImportProcess extends RuAbstractProcess implements ReadHandle
     ReadHandler readHandler;
     MessageSource msg;
 
-
     @Override
     public void beforeProcess() {
         super.beforeProcess();
