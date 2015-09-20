@@ -51,6 +51,10 @@ public class PlayerServiceStub implements PlayerService {
     }
 
     public int addPlayer(Player player) throws ServiceException {
+        if(myList.contains(player))
+        {
+            throw new ServiceException();
+        }
         myList.add(player);
         /** Not sure if we should return player id*/
         return player.getPlayerId();
