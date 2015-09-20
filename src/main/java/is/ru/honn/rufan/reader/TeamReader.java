@@ -15,8 +15,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class TeamReader
+public class TeamReader extends AbstractReader
+
 {
+  public TeamReader() {
+    super();
+  }
+
   public Object parse(String content)
   {
     String tmp;

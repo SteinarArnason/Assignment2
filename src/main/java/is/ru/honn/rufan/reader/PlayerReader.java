@@ -7,9 +7,13 @@ import org.json.simple.JSONValue;
 
 import java.util.*;
 
-public class PlayerReader
+public class PlayerReader extends AbstractReader
 {
-  public Object parse(String content)
+    public PlayerReader() {
+        super();
+    }
+
+    public Object parse(String content)
   {
     // Root object
     JSONObject jsonObject = (JSONObject) JSONValue.parse(content);
