@@ -35,6 +35,7 @@ public class PlayerServiceStub implements PlayerService {
         return team;
     }
 
+    // We're assuming that the abbreviation here is for the players' position
     public List<Player> getPlayersByAbbreviation(String abbreviation) {
         List<Player> p = new ArrayList<Player>();
         for(Player m : myList) {
@@ -56,7 +57,7 @@ public class PlayerServiceStub implements PlayerService {
             throw new ServiceException();
         }
         myList.add(player);
-        /** Not sure if we should return player id*/
+        // Not sure if we should return player id
         return player.getPlayerId();
     }
 }

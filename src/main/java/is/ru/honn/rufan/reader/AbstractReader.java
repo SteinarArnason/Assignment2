@@ -10,12 +10,24 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
-public abstract class AbstractReader {
+public abstract class AbstractReader implements Reader {
+
+    protected ReadHandler readHandler;
 
     public AbstractReader() {
     }
 
-    protected abstract Object parse(String content);
+    public Object read() {
+        return null;
+    }
+
+    public void setURI(String URI) {
+        //TODO
+    }
+
+    public void setReadHandler(ReadHandler readHandler) {
+        this.readHandler = readHandler;
+    }
 
     protected int getInt(JSONObject jParent, String name)
     {
