@@ -4,7 +4,9 @@ import is.ru.honn.rufan.reader.ReadHandler;
 import is.ru.honn.rufan.service.PlayerService;
 import is.ru.honn.rufan.service.TeamService;
 import is.ruframework.process.RuAbstractProcess;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.MessageSource;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
 
 import java.util.logging.Logger;
 
@@ -17,7 +19,8 @@ public class PlayerImportProcess extends RuAbstractProcess implements ReadHandle
 
     @Override
     public void beforeProcess() {
-        super.beforeProcess();
+        ApplicationContext ctx = new FileSystemXmlApplicationContext("classpath:reader.xml");
+
     }
 
     @Override
