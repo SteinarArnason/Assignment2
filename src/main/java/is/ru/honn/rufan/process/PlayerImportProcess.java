@@ -19,18 +19,22 @@ public class PlayerImportProcess extends RuAbstractProcess implements ReadHandle
 
     @Override
     public void beforeProcess() {
-        ApplicationContext ctx = new FileSystemXmlApplicationContext("classpath:reader.xml");
-
+        System.out.println("BeforeProcess");
+        log.info("processbefore: " + getProcessContext().getProcessName());
+        ApplicationContext readerCtx = new FileSystemXmlApplicationContext("classpath:reader.xml");
+        ApplicationContext serviceCtx = new FileSystemXmlApplicationContext("classpath:service.xml");
+        System.out.println("Player service = " + serviceCtx.getBean("playerServiceStub"));
     }
 
     @Override
     public void startProcess() {
-
+        System.out.println("StartProcess");
     }
 
     @Override
     public void afterProcess() {
         super.afterProcess();
+        System.out.println("AfterProcess");
     }
 
     public void read(int count, Object object) {
