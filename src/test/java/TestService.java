@@ -1,6 +1,8 @@
 import is.ru.honn.rufan.domain.Player;
+import is.ru.honn.rufan.domain.Team;
 import is.ru.honn.rufan.reader.ReaderFactory;
 import is.ru.honn.rufan.service.PlayerService;
+import is.ru.honn.rufan.service.TeamService;
 import is.ru.honn.rufan.service.exception.ServiceException;
 import junit.framework.TestCase;
 import org.junit.Test;
@@ -14,9 +16,9 @@ import java.util.logging.Logger;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:app-test-stub.xml")
 //@ContextConfiguration("file:src/main/resources/service.xml")
-public class TestPlayerService extends TestCase {
+public class TestService extends TestCase {
 
-    Logger log = Logger.getLogger(TestPlayerService.class.getName());
+    Logger log = Logger.getLogger(TestService.class.getName());
     @Autowired
     private PlayerService servicePlayer;
 
@@ -32,6 +34,7 @@ public class TestPlayerService extends TestCase {
         } catch (ServiceException e) {
             String msg = "Adding players failed";
             log.info(msg);
+            assertTrue(false);
         }
 
         /**Testing addPlayer failure*/
@@ -46,8 +49,47 @@ public class TestPlayerService extends TestCase {
         assertSame(player1, player3);
 
         /**Testing getPlayer non-existing*/
-  /*      Player player4 = servicePlayer.getPlayer(2);
+        Player player4 = servicePlayer.getPlayer(2);
         assertNull(player4);
-    */}
+    }
+
+    @Autowired
+    private TeamService serviceTeam;
+
+    @Test
+    public void testTeam(){
+        Team team1 = new Team(123, "kj","KJAY");
+        Team team2 = new Team(321, "sa", "STONY");
+        Team fail = new Team(1123, "", "WorstTeamEver");
+        int myLeuage = 1337;
+
+        try {
+            serviceTeam.addTeam(myLeuage, team1);
+            serviceTeam.addTeam(myLeuage, team2);
+        } catch (ServiceException e) {
+            log.info(e.getMessage());
+        }
+
+        try {
+            assertEquals(2, serviceTeam.getTeams(myLeuage).size());
+        } catch (ServiceException e)
+        {
+            log.info(e.getMessage());
+            assertTrue(false);
+        }
+
+        try {
+            serviceTeam.addTeam(myLeuage, team1);
+        } catch (ServiceException e) {
+            assertSame(ServiceException.class, e.getClass());
+        }
+
+        try {
+            serviceTeam.addTeam(myLeuage,fail);
+        } catch (ServiceException e) {
+            assertSame(ServiceException.class, e.getClass());
+        }
+
+    }
 
 }

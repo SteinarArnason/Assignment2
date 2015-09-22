@@ -19,6 +19,10 @@ public class TeamServiceStub implements TeamService {
             log.info(msg);
             throw new ServiceException(msg);
         }
+        if(team.getAbbreviation().equals(""))
+        {
+            throw new ServiceException("Missing team abbreviation");
+        }
         if(!myMap.containsKey(leagueId)) {
             myMap.put(leagueId, new ArrayList<Team>());
         }

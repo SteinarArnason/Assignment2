@@ -12,18 +12,22 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.util.logging.Logger;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:app-test-reader.xml")
-public class TestReader extends TestCase {
+@ContextConfiguration("classpath:app-test-factory.xml")
+public class TestReaderFactory extends TestCase {
     Logger log = Logger.getLogger(TestTeamService.class.getName());
 
     @Autowired
+    private ReaderFactory rf;
     private PlayerReader playerReader;
     private TeamReader teamReader;
-
     @Test
-    public void TestReader()
+    public void TestReadFactory()
     {
-        
+        playerReader = (PlayerReader) rf.getReader("playerReader");
+        assertNotNull(playerReader);
+
+        teamReader = (TeamReader) rf.getReader("teamReader");
+        assertNotNull(teamReader);
 
     }
 }
