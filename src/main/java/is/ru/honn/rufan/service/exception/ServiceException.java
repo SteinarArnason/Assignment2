@@ -1,5 +1,8 @@
 package is.ru.honn.rufan.service.exception;
 
+/**
+ * Custom exception
+ */
 public class ServiceException extends Exception {
     public ServiceException()
     {
