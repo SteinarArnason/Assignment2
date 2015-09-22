@@ -25,7 +25,7 @@ public class PlayerImportProcess extends RuAbstractProcess implements ReadHandle
     Locale localis;
 
     /**
-     * Initialize all the variables that the process is going to use
+     * Initialize all the variables that the process is going to use and log that we are in the beforeprocess
      */
     @Override
     public void beforeProcess() {
@@ -44,7 +44,7 @@ public class PlayerImportProcess extends RuAbstractProcess implements ReadHandle
     }
 
     /**
-     * Starts the process
+     * Starts the process and logs that the process has started
      */
     @Override
     public void startProcess() {
@@ -55,7 +55,7 @@ public class PlayerImportProcess extends RuAbstractProcess implements ReadHandle
     }
 
     /**
-     * Logs that we
+     * Logs that the process is over
      */
     @Override
     public void afterProcess() {
