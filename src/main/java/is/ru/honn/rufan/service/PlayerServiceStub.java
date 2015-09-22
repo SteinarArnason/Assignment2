@@ -2,6 +2,8 @@ package is.ru.honn.rufan.service;
 
 import is.ru.honn.rufan.domain.Player;
 import is.ru.honn.rufan.domain.Position;
+import is.ru.honn.rufan.observer.PlayerObserver;
+import is.ru.honn.rufan.observer.Subject;
 import is.ru.honn.rufan.service.exception.ServiceException;
 
 import java.util.ArrayList;
@@ -11,8 +13,11 @@ import java.util.logging.Logger;
 public class PlayerServiceStub implements PlayerService {
     Logger log = Logger.getLogger(PlayerServiceStub.class.getName());
     private List<Player> myList;
+    private Subject subject;
     public PlayerServiceStub() {
         super();
+        subject = new Subject();
+        new PlayerObserver(subject);
         myList = new ArrayList<Player>();
     }
 
@@ -54,12 +59,16 @@ public class PlayerServiceStub implements PlayerService {
     }
 
     public int addPlayer(Player player) throws ServiceException {
+
         if(myList.contains(player)) {
             String msg = "Player '" + player.getPlayerId() + "' already exists";
             log.info(msg);
             throw new ServiceException(msg);
         }
         myList.add(player);
+
+
+        subject.setState(player);
         // Not sure if we should return player id
         return player.getPlayerId();
     }
