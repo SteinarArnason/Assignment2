@@ -64,7 +64,8 @@ public class PlayerImportProcess extends RuAbstractProcess implements ReadHandle
             playerService.addPlayer(p);
             numberReads ++;
         } catch (ServiceException e) {
-         //   System.out.println("Failed to added reader, TODO: should probably do something");
+            log.info(msg.getMessage("processreaderror", new Object[] { getProcessContext().getImportURL() }, Locale.getDefault()));
+            log.info(e.getMessage());
         }
     }
 }
