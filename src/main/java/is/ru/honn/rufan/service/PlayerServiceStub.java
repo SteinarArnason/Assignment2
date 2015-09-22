@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+/**
+ * Stub for PlayerService
+ */
 public class PlayerServiceStub implements PlayerService {
     Logger log = Logger.getLogger(PlayerServiceStub.class.getName());
     private List<Player> myList;
@@ -21,6 +24,11 @@ public class PlayerServiceStub implements PlayerService {
         myList = new ArrayList<Player>();
     }
 
+    /**
+     * Gets a specific player
+     * @param playerId id of the player
+     * @return player or null of player wasn't found
+     */
     public Player getPlayer(int playerId) {
         for(Player m : myList)
         {
@@ -32,6 +40,11 @@ public class PlayerServiceStub implements PlayerService {
         return null;
     }
 
+    /**
+     * Gets players from a team
+     * @param teamId id of the team
+     * @return List of players from the specific team
+     */
     public List<Player> getPlayers(int teamId) {
         List<Player> team = new ArrayList<Player>();
         for(Player m : myList) {
@@ -42,7 +55,11 @@ public class PlayerServiceStub implements PlayerService {
         return team;
     }
 
-    // We're assuming that the abbreviation here is for the players' position
+    /**
+     * Gets a list of players by team abbreviation
+     * @param abbreviation the team abbreviation
+     * @return list of players for that team
+     */
     public List<Player> getPlayersByAbbreviation(String abbreviation) {
         List<Player> p = new ArrayList<Player>();
         for(Player m : myList) {
@@ -58,6 +75,12 @@ public class PlayerServiceStub implements PlayerService {
         return p;
     }
 
+    /**
+     * Adds a player to our list
+     * @param player the player information
+     * @return size of the list
+     * @throws ServiceException
+     */
     public int addPlayer(Player player) throws ServiceException {
 
         if(myList.contains(player)) {
@@ -69,7 +92,6 @@ public class PlayerServiceStub implements PlayerService {
 
 
         subject.setState(player);
-        // Not sure if we should return player id
-        return player.getPlayerId();
+        return myList.size()-1;
     }
 }
