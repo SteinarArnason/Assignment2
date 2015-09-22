@@ -24,6 +24,7 @@ public class PlayerImportProcess extends RuAbstractProcess implements ReadHandle
     Reader reader;
     MessageSource msg;
     int numberReads;
+    Locale localis;
 
     @Override
     public void beforeProcess() {
@@ -32,19 +33,23 @@ public class PlayerImportProcess extends RuAbstractProcess implements ReadHandle
         //log.info("processbefore: " + getProcessContext().getProcessName());
         ApplicationContext serviceCtx = new FileSystemXmlApplicationContext("classpath:service.xml");
         msg = (MessageSource) serviceCtx.getBean("messageSource");
+
         playerService = (PlayerService) serviceCtx.getBean("playerServiceStub");
         teamService = (TeamService) serviceCtx.getBean("teamServiceStub");
         ReaderFactory rf = new ReaderFactory();
         reader = rf.getReader("playerReader");
         reader.setReadHandler(this);
         reader.setURI("http://olafurandri.com/honn/players.json");
+        localis = new Locale("is", "IS");
         log.info(msg.getMessage("processbefore", new Object[]{getProcessContext().getProcessName()}, Locale.ENGLISH));
+        log.info(msg.getMessage("processbefore", new Object[]{getProcessContext().getProcessName()}, localis));
     }
 
     @Override
     public void startProcess() {
         //System.out.println("StartProcess");
         log.info(msg.getMessage("processstart", new Object[]{getProcessContext().getProcessName()}, Locale.ENGLISH));
+        log.info(msg.getMessage("processstart", new Object[]{getProcessContext().getProcessName()}, localis));
         reader.read();
 
     }
@@ -56,6 +61,7 @@ public class PlayerImportProcess extends RuAbstractProcess implements ReadHandle
         Player ronaldo = playerService.getPlayer(839802);
        // System.out.println(ronaldo.getFirstName());
         log.info(msg.getMessage("processstartdone", new Object[]{numberReads}, Locale.ENGLISH));
+        log.info(msg.getMessage("processstartdone", new Object[]{numberReads}, localis));
     }
 
     public void read(int count, Object object) {
@@ -64,7 +70,8 @@ public class PlayerImportProcess extends RuAbstractProcess implements ReadHandle
             playerService.addPlayer(p);
             numberReads ++;
         } catch (ServiceException e) {
-            log.info(msg.getMessage("processreaderror", new Object[] { getProcessContext().getImportURL() }, Locale.getDefault()));
+            log.severe(msg.getMessage("processreaderror", new Object[]{count}, Locale.ENGLISH));
+            log.severe(msg.getMessage("processreaderror", new Object[]{count}, localis));
             log.info(e.getMessage());
         }
     }
