@@ -4,4 +4,12 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
        <bean id="playerServiceStub" class="is.ru.honn.rufan.service.PlayerServiceStub"/>
        <bean id="teamServiceStub" class="is.ru.honn.rufan.service.TeamServiceStub"/>
+
+       <bean id="messageSource"
+             class="org.springframework.context.support.ResourceBundleMessageSource">
+              <property name="basename">
+                     <value>messages</value>
+              </property>
+       </bean>
+
 </beans>

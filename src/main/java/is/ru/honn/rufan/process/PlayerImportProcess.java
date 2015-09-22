@@ -13,6 +13,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.MessageSource;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
+import java.util.Locale;
 import java.util.logging.Logger;
 
 public class PlayerImportProcess extends RuAbstractProcess implements ReadHandler {
@@ -22,23 +23,28 @@ public class PlayerImportProcess extends RuAbstractProcess implements ReadHandle
     ReadHandler readHandler;
     Reader reader;
     MessageSource msg;
+    int numberReads;
 
     @Override
     public void beforeProcess() {
-        System.out.println("BeforeProcess");
-        log.info("processbefore: " + getProcessContext().getProcessName());
+        numberReads = 0;
+        //System.out.println("BeforeProcess");
+        //log.info("processbefore: " + getProcessContext().getProcessName());
         ApplicationContext serviceCtx = new FileSystemXmlApplicationContext("classpath:service.xml");
+        msg = (MessageSource) serviceCtx.getBean("messageSource");
         playerService = (PlayerService) serviceCtx.getBean("playerServiceStub");
         teamService = (TeamService) serviceCtx.getBean("teamServiceStub");
         ReaderFactory rf = new ReaderFactory();
         reader = rf.getReader("playerReader");
         reader.setReadHandler(this);
         reader.setURI("http://olafurandri.com/honn/players.json");
+        log.info(msg.getMessage("processbefore", new Object[]{getProcessContext().getProcessName()}, Locale.ENGLISH));
     }
 
     @Override
     public void startProcess() {
-        System.out.println("StartProcess");
+        //System.out.println("StartProcess");
+        log.info(msg.getMessage("processstart", new Object[]{getProcessContext().getProcessName()}, Locale.ENGLISH));
         reader.read();
 
     }
@@ -46,17 +52,19 @@ public class PlayerImportProcess extends RuAbstractProcess implements ReadHandle
     @Override
     public void afterProcess() {
         super.afterProcess();
-        System.out.println("AfterProcess");
+        //System.out.println("AfterProcess");
         Player ronaldo = playerService.getPlayer(839802);
-        System.out.println(ronaldo.getFirstName());
+       // System.out.println(ronaldo.getFirstName());
+        log.info(msg.getMessage("processstartdone", new Object[]{numberReads}, Locale.ENGLISH));
     }
 
     public void read(int count, Object object) {
         Player p = (Player) object;
         try {
             playerService.addPlayer(p);
+            numberReads ++;
         } catch (ServiceException e) {
-            System.out.println("Failed to added reader, TODO: should probably do something");
+         //   System.out.println("Failed to added reader, TODO: should probably do something");
         }
     }
 }

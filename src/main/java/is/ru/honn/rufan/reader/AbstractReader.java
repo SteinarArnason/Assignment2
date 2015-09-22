@@ -19,9 +19,7 @@ public abstract class AbstractReader implements Reader {
     public AbstractReader() {
     }
 
-    public Object read() {
-        return parse(new ClientRequest().getRequest(URI));
-    }
+    public Object read() { return parse(new ClientRequest().getRequest(URI)); }
 
     public void setURI(String URI) {
         this.URI = URI;
