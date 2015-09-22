@@ -18,6 +18,13 @@ public class Player {
     public Player() {
     }
 
+    public Player(int playerId, String firstName, String lastName, int teamId) {
+        this.playerId = playerId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.teamId = teamId;
+    }
+
     public int getPlayerId() {
         return playerId;
     }

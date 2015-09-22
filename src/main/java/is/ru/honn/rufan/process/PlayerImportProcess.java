@@ -20,7 +20,6 @@ public class PlayerImportProcess extends RuAbstractProcess implements ReadHandle
     Logger log = Logger.getLogger(this.getClass().getName());
     protected PlayerService playerService;
     protected TeamService teamService;
-    ReadHandler readHandler;
     Reader reader;
     MessageSource msg;
     int numberReads;
@@ -29,8 +28,6 @@ public class PlayerImportProcess extends RuAbstractProcess implements ReadHandle
     @Override
     public void beforeProcess() {
         numberReads = 0;
-        //System.out.println("BeforeProcess");
-        //log.info("processbefore: " + getProcessContext().getProcessName());
         ApplicationContext serviceCtx = new FileSystemXmlApplicationContext("classpath:service.xml");
         msg = (MessageSource) serviceCtx.getBean("messageSource");
 
@@ -47,7 +44,6 @@ public class PlayerImportProcess extends RuAbstractProcess implements ReadHandle
 
     @Override
     public void startProcess() {
-        //System.out.println("StartProcess");
         log.info(msg.getMessage("processstart", new Object[]{getProcessContext().getProcessName()}, Locale.ENGLISH));
         log.info(msg.getMessage("processstart", new Object[]{getProcessContext().getProcessName()}, localis));
         reader.read();
@@ -57,9 +53,6 @@ public class PlayerImportProcess extends RuAbstractProcess implements ReadHandle
     @Override
     public void afterProcess() {
         super.afterProcess();
-        //System.out.println("AfterProcess");
-        Player ronaldo = playerService.getPlayer(839802);
-       // System.out.println(ronaldo.getFirstName());
         log.info(msg.getMessage("processstartdone", new Object[]{numberReads}, Locale.ENGLISH));
         log.info(msg.getMessage("processstartdone", new Object[]{numberReads}, localis));
     }
@@ -68,7 +61,7 @@ public class PlayerImportProcess extends RuAbstractProcess implements ReadHandle
         Player p = (Player) object;
         try {
             playerService.addPlayer(p);
-            numberReads ++;
+            numberReads++;
         } catch (ServiceException e) {
             log.severe(msg.getMessage("processreaderror", new Object[]{count}, Locale.ENGLISH));
             log.severe(msg.getMessage("processreaderror", new Object[]{count}, localis));

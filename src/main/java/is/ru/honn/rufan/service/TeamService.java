@@ -8,6 +8,6 @@ import java.util.List;
 public interface TeamService
 {
     int addTeam(int leagueId, Team team) throws ServiceException;
-    List<Team> getTeams(int leagueId);
+    List<Team> getTeams(int leagueId) throws ServiceException;
 }
 

@@ -9,6 +9,15 @@ public class Team
   private String displayName;
   protected Venue venue;
 
+  public Team() {
+  }
+
+  public Team(int teamId, String abbreviation, String displayName) {
+    this.teamId = teamId;
+    this.abbreviation = abbreviation;
+    this.displayName = displayName;
+  }
+
   public int getTeamId()
   {
     return teamId;

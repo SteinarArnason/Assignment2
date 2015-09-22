@@ -14,6 +14,11 @@ public class TeamServiceStub implements TeamService {
     }
 
     public int addTeam(int leagueId, Team team) throws ServiceException {
+        if(leagueId < 0) {
+            String msg = "LeagueID '" + leagueId + "' is an illegal id";
+            log.info(msg);
+            throw new ServiceException(msg);
+        }
         if(!myMap.containsKey(leagueId)) {
             myMap.put(leagueId, new ArrayList<Team>());
         }
@@ -28,7 +33,12 @@ public class TeamServiceStub implements TeamService {
         return team.getTeamId();
     }
 
-    public List<Team> getTeams(int leagueId) {
+    public List<Team> getTeams(int leagueId) throws ServiceException{
+        if(!myMap.containsKey(leagueId)) {
+            String msg = "League '" + leagueId + "' does not exist so no team could be retrieved";
+            log.info(msg);
+            throw new ServiceException(msg);
+        }
         return myMap.get(leagueId);
     }
 }
