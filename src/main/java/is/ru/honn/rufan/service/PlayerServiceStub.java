@@ -58,6 +58,20 @@ public class PlayerServiceStub implements PlayerService {
         return p;
     }
 
+    public List<Player> getPlayersByTeam(String s, TeamService ts)
+    {
+        List<Player> p = new ArrayList<Player>();
+        int teamID = ts.getTeamIdByAbbriveation(s);
+        for(int i = 0; i < myList.size(); i++)
+        {
+            if(myList.get(i).getTeamId() == teamID)
+            {
+                p.add(myList.get(i));
+            }
+        }
+        return p;
+    }
+
     public int addPlayer(Player player) throws ServiceException {
 
         if(myList.contains(player)) {

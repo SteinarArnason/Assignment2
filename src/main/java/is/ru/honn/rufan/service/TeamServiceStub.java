@@ -45,4 +45,20 @@ public class TeamServiceStub implements TeamService {
         }
         return myMap.get(leagueId);
     }
+
+    public int getTeamIdByAbbriveation(String abb)
+    {
+        List<Team> all = new ArrayList<Team>();
+        for(Map.Entry<Integer, List<Team> > entry: myMap.entrySet()) {
+            all.addAll(entry.getValue());
+        }
+        for(int i = 0; i < all.size(); i++)
+        {
+            if(all.get(i).getAbbreviation() == abb)
+            {
+                return all.get(i).getTeamId();
+            }
+        }
+        return 0;
+    }
 }

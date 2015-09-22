@@ -9,5 +9,6 @@ public interface TeamService
 {
     int addTeam(int leagueId, Team team) throws ServiceException;
     List<Team> getTeams(int leagueId) throws ServiceException;
+    int getTeamIdByAbbriveation(String abb);
 }
 
