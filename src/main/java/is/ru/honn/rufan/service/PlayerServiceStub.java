@@ -6,8 +6,10 @@ import is.ru.honn.rufan.service.exception.ServiceException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class PlayerServiceStub implements PlayerService {
+    Logger log = Logger.getLogger(PlayerServiceStub.class.getName());
     private List<Player> myList;
     public PlayerServiceStub() {
         super();
@@ -52,9 +54,10 @@ public class PlayerServiceStub implements PlayerService {
     }
 
     public int addPlayer(Player player) throws ServiceException {
-        if(myList.contains(player))
-        {
-            throw new ServiceException();
+        if(myList.contains(player)) {
+            String msg = "Player '" + player.getPlayerId() + "' already exists";
+            log.info(msg);
+            throw new ServiceException(msg);
         }
         myList.add(player);
         // Not sure if we should return player id

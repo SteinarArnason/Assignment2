@@ -4,8 +4,10 @@ import is.ru.honn.rufan.domain.Team;
 import is.ru.honn.rufan.service.exception.ServiceException;
 
 import java.util.*;
+import java.util.logging.Logger;
 
 public class TeamServiceStub implements TeamService {
+    Logger log = Logger.getLogger(TeamServiceStub.class.getName());
     private Map<Integer, List<Team>> myMap;
     public TeamServiceStub() {
         myMap = new HashMap<Integer, List<Team>>();
@@ -16,7 +18,9 @@ public class TeamServiceStub implements TeamService {
             myMap.put(leagueId, new ArrayList<Team>());
         }
         if(myMap.get(leagueId).contains(team)) {
-            throw new ServiceException();
+            String msg = "Team '" + team.getTeamId() + "' already in league '" + leagueId + "'";
+            log.info(msg);
+            throw new ServiceException(msg);
         }
         else {
             myMap.get(leagueId).add(team);
