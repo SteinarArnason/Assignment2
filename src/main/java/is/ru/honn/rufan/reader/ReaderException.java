@@ -1,6 +1,8 @@
 package is.ru.honn.rufan.reader;
 
-
+/**
+ * Custom exception
+ */
 public class ReaderException extends Exception
 {
   public ReaderException()

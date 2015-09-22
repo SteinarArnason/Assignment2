@@ -7,12 +7,20 @@ import org.json.simple.JSONValue;
 
 import java.util.*;
 
+/**
+ * Reads a player
+ */
 public class PlayerReader extends AbstractReader
 {
     public PlayerReader() {
         super();
     }
 
+  /**
+   * Parses the string for players
+   * @param content a json file
+   * @return an object
+   */
     public Object parse(String content)
   {
     // Root object

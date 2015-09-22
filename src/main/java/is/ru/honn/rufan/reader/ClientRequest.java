@@ -8,12 +8,20 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+/**
+ * A request from the client
+ */
 public class ClientRequest
 {
   public ClientRequest()
   {
   }
 
+  /**
+   * Gets a URL requested by the client
+   * @param url A link to a website
+   * @return a string from the website
+   */
   public String getRequest(String url)
   {
     Client client = ClientBuilder.newClient();

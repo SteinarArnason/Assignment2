@@ -34,10 +34,12 @@ public class PlayerImportProcess extends RuAbstractProcess implements ReadHandle
         msg = (MessageSource) serviceCtx.getBean("messageSource");
         playerService = (PlayerService) serviceCtx.getBean("playerServiceStub");
         teamService = (TeamService) serviceCtx.getBean("teamServiceStub");
-        ReaderFactory rf = new ReaderFactory();
-        reader = rf.getReader("playerReader");
-        reader.setReadHandler(this);
-        reader.setURI("http://olafurandri.com/honn/players.json");
+
+            ReaderFactory rf = new ReaderFactory();
+            reader = rf.getReader("playerReader");
+            reader.setReadHandler(this);
+            reader.setURI("http://olafurandri.com/honn/players.json");
+
         localis = new Locale("is", "IS");
         log.info(msg.getMessage("processbefore", new Object[]{getProcessContext().getProcessName()}, Locale.ENGLISH));
         log.info(msg.getMessage("processbefore", new Object[]{getProcessContext().getProcessName()}, localis));

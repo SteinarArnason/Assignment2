@@ -15,6 +15,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+/**
+ * Reads a team
+ */
 public class TeamReader extends AbstractReader
 
 {
@@ -22,6 +25,11 @@ public class TeamReader extends AbstractReader
     super();
   }
 
+  /**
+   * Parses the string for players
+   * @param content a json file
+   * @return an object
+   */
   public Object parse(String content)
   {
     String tmp;
