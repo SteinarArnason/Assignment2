@@ -1,7 +1,6 @@
 package is.ru.honn.rufan.process;
 
 import is.ru.honn.rufan.domain.Player;
-import is.ru.honn.rufan.reader.AbstractReader;
 import is.ru.honn.rufan.reader.ReadHandler;
 import is.ru.honn.rufan.reader.Reader;
 import is.ru.honn.rufan.reader.ReaderFactory;
@@ -30,7 +29,6 @@ public class PlayerImportProcess extends RuAbstractProcess implements ReadHandle
         numberReads = 0;
         ApplicationContext serviceCtx = new FileSystemXmlApplicationContext("classpath:service.xml");
         msg = (MessageSource) serviceCtx.getBean("messageSource");
-
         playerService = (PlayerService) serviceCtx.getBean("playerServiceStub");
         teamService = (TeamService) serviceCtx.getBean("teamServiceStub");
         ReaderFactory rf = new ReaderFactory();

@@ -100,4 +100,19 @@ public class Player {
     public void addPosition(Position p) {
         this.positions.add(p);
     }
+
+    @Override
+    public String toString() {
+        return "Player{" +
+                "playerId=" + playerId +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", height=" + height +
+                ", weight=" + weight +
+                ", birthDate=" + birthDate +
+                ", nationality=" + nationality +
+                ", teamId=" + teamId +
+                ", positions=" + positions +
+                '}';
+    }
 }
