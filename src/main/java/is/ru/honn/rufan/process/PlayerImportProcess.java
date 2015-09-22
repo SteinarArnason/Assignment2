@@ -24,6 +24,9 @@ public class PlayerImportProcess extends RuAbstractProcess implements ReadHandle
     int numberReads;
     Locale localis;
 
+    /**
+     * Initialize all the variables that the process is going to use
+     */
     @Override
     public void beforeProcess() {
         numberReads = 0;
@@ -40,6 +43,9 @@ public class PlayerImportProcess extends RuAbstractProcess implements ReadHandle
         log.info(msg.getMessage("processbefore", new Object[]{getProcessContext().getProcessName()}, localis));
     }
 
+    /**
+     * Starts the process
+     */
     @Override
     public void startProcess() {
         log.info(msg.getMessage("processstart", new Object[]{getProcessContext().getProcessName()}, Locale.ENGLISH));
@@ -48,6 +54,9 @@ public class PlayerImportProcess extends RuAbstractProcess implements ReadHandle
 
     }
 
+    /**
+     * Logs that we
+     */
     @Override
     public void afterProcess() {
         super.afterProcess();
@@ -55,6 +64,11 @@ public class PlayerImportProcess extends RuAbstractProcess implements ReadHandle
         log.info(msg.getMessage("processstartdone", new Object[]{numberReads}, localis));
     }
 
+    /**
+     * Process implements so this gets called when we read new player in PlayerReader
+     * @param count count of player
+     * @param object player object
+     */
     public void read(int count, Object object) {
         Player p = (Player) object;
         try {
