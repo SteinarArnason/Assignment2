@@ -61,17 +61,17 @@ public class TestService extends TestCase {
         Team team1 = new Team(123, "kj","KJAY");
         Team team2 = new Team(321, "sa", "STONY");
         Team fail = new Team(1123, "", "WorstTeamEver");
-        int myLeuage = 1337;
+        int myLeague = 1337;
 
         try {
-            serviceTeam.addTeam(myLeuage, team1);
-            serviceTeam.addTeam(myLeuage, team2);
+            serviceTeam.addTeam(myLeague, team1);
+            serviceTeam.addTeam(myLeague, team2);
         } catch (ServiceException e) {
             log.info(e.getMessage());
         }
 
         try {
-            assertEquals(2, serviceTeam.getTeams(myLeuage).size());
+            assertEquals(2, serviceTeam.getTeams(myLeague).size());
         } catch (ServiceException e)
         {
             log.info(e.getMessage());
@@ -79,14 +79,21 @@ public class TestService extends TestCase {
         }
 
         try {
-            serviceTeam.addTeam(myLeuage, team1);
+            serviceTeam.addTeam(myLeague, team1);
         } catch (ServiceException e) {
             assertSame(ServiceException.class, e.getClass());
         }
 
         try {
-            serviceTeam.addTeam(myLeuage,fail);
+            serviceTeam.addTeam(myLeague,fail);
         } catch (ServiceException e) {
+            assertSame(ServiceException.class, e.getClass());
+        }
+
+        try {
+            serviceTeam.getTeams(112233);
+        } catch (ServiceException e)
+        {
             assertSame(ServiceException.class, e.getClass());
         }
 
