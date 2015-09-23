@@ -1,5 +1,7 @@
 import is.ru.honn.rufan.domain.Player;
 import is.ru.honn.rufan.domain.Team;
+import is.ru.honn.rufan.observer.PlayerObserver;
+import is.ru.honn.rufan.observer.Subject;
 import is.ru.honn.rufan.reader.ReaderFactory;
 import is.ru.honn.rufan.service.PlayerService;
 import is.ru.honn.rufan.service.TeamService;
@@ -19,6 +21,10 @@ import java.util.logging.Logger;
 public class TestService extends TestCase {
 
     Logger log = Logger.getLogger(TestService.class.getName());
+    private Subject subject = new Subject();
+
+
+
     @Autowired
     private PlayerService servicePlayer;
 
@@ -81,11 +87,25 @@ public class TestService extends TestCase {
         }
 
         try {
-            serviceTeam.addTeam(myLeuage,fail);
+            serviceTeam.addTeam(myLeuage, fail);
         } catch (ServiceException e) {
             assertSame(ServiceException.class, e.getClass());
         }
 
+    }
+
+    @Test
+    public void testObserver() {
+        new PlayerObserver(subject);
+        Player newPlayer = new Player(22, "Kristinn", "Juliusson", 39);
+
+        try {
+            servicePlayer.addPlayer(newPlayer);
+        } catch (ServiceException e) {
+            log.info(e.getMessage());
+        }
+        subject.setState(newPlayer);
+        assertSame(subject.getState(), newPlayer);
     }
 
 }

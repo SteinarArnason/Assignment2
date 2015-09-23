@@ -1,7 +1,6 @@
 package is.ru.honn.rufan.reader;
 
 
-import is.ru.honn.rufan.reader.Reader;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
