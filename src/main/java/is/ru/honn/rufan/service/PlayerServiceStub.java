@@ -56,7 +56,7 @@ public class PlayerServiceStub implements PlayerService {
     }
 
     /**
-     * Gets a list of players by team abbreviation
+     * Gets a list of players by position abbreviation
      * @param abbreviation the team abbreviation
      * @return list of players for that team
      */
@@ -74,6 +74,27 @@ public class PlayerServiceStub implements PlayerService {
         }
         return p;
     }
+
+    /**
+     * Gets players by team abbreviation
+     * @param s teams abbreviation
+     * @param ts teamservice stub
+     * @return List of all players in team
+     */
+    public List<Player> getPlayersByTeam(String s, TeamService ts)
+    {
+        List<Player> p = new ArrayList<Player>();
+        int teamID = ts.getTeamIdByAbbriveation(s);
+        for(int i = 0; i < myList.size(); i++)
+        {
+            if(myList.get(i).getTeamId() == teamID)
+            {
+                p.add(myList.get(i));
+            }
+        }
+        return p;
+    }
+
 
     /**
      * Adds a player to our list
